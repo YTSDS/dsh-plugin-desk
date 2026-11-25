@@ -1,0 +1,39 @@
+{
+  "name": "dsh-plugin-desk",
+  "displayName": "DSH 插件台 / Plugin Desk",
+  "version": "0.2.0",
+  "description": "Plugin browsing tab inside DSH: syncs all 12,928 plugins from the GitHub awesome-dsh-plugin repo, with search, star/download/screenshot preview and one-click install (npm, release tarball, or plain GitHub repo).",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "plugin-market",
+    "plugin-desk"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0-rc.1 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "cordis.patch.yml"
+    },
+    "client": {
+      "entry": "client",
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ]
+}

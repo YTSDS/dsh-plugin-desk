@@ -1,0 +1,4 @@
+# 独立注册：插件台的宿主半区（目录代理 + 热度代理 + 已安装清单）。
+- insert:
+    - id: plugin-desk
+      name: dsh-plugin-desk
