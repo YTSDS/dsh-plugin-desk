@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package plugin
+        run: |
+          set -e
+          STAGE=dist/dsh-plugin-desk
+          mkdir -p "$STAGE"
+          cp -r lib "$STAGE/"
+          cp -r install "$STAGE/"
+          for f in cordis.patch.yml package.json README.md README.en.md LICENSE CHANGELOG.md; do
+            [ -f "$f" ] && cp "$f" "$STAGE/"
+          done
+          cd dist
+          zip -r "../dsh-plugin-desk-${GITHUB_REF_NAME}.zip" dsh-plugin-desk
+          cd ..
+          ls -l "dsh-plugin-desk-${GITHUB_REF_NAME}.zip"
+
+      - name: Validate package.json
+        run: |
+          node -e "const p=require('./package.json'); if(!p.name||!p.version) throw new Error('bad package.json'); console.log(p.name, p.version)"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dsh-plugin-desk-*.zip
+          generate_release_notes: true
+          body: |
+            DSH Plugin Desk `${{ github.ref_name }}`
+
+            Install: download the zip below, then
+            `dsh plugin --profile desktop add <extracted>/dsh-plugin-desk`
+            (or run `install/install-desktop.cmd` on Windows).
