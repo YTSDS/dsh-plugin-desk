@@ -1,6 +1,6 @@
 # DSH Plugin Desk · DSH 插件台
 
-[中文](#中文) | [English](#english)
+[中文](#中文) | [English](#english) | [English README（独立文件）](README.en.md)
 
 在 DSH（DeepSeek Harness）的 **插件** 页里加一个 **插件台** 标签页：把 GitHub 仓库
 [`awesome-dsh-plugin/awesome-dsh-plugin`](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)
